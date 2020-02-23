@@ -8,10 +8,21 @@ Set /P UserName="Please enter user name to connect: "
 
 Set /P Database="Please enter Database to backup: "
 
-Set /P Object="Please select Objects to Backup: 1. For Procedures 2. For Functions : "
+REM echo "Please select Objects to Backup: "
+REM echo "1. For Procedures"
+REM echo "2. For Functions" 
 
-mysql -N -h %Server% -u %UserName% -p  -e "Select name from mysql.proc where type= 'FUNCTION' AND db='%Database%' " >> ./ObjectList/Functions.txt
-mysql -N -h %Server% -u %UserName% -p  -e "Select name from mysql.proc where type= 'PROCEDURE' AND db='%Database%' " >> ./ObjectList/Routines.txt
+@echo off
+setlocal
+
+set /P "=_" < NUL > "Enter password"
+findstr /A:1E /V "^$" "Enter password" NUL > CON
+del "Enter password"
+set /P "password="
+cls
+color 07
+mysql -N -h %Server% -u %UserName% -p%password%  -e "Select name from mysql.proc where type= 'FUNCTION' AND db='%Database%' " >> ./ObjectList/Functions.txt
+mysql -N -h %Server% -u %UserName% -p%password%  -e "Select name from mysql.proc where type= 'PROCEDURE' AND db='%Database%' " >> ./ObjectList/Routines.txt
 
 
 pause
