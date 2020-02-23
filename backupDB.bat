@@ -13,7 +13,8 @@ Set /P Object="Please select Objects to Backup: 1. For Procedures 2. For Functio
 
 Set /P pass="Enter Pass"
 
-FOR /F %%i IN (./ObjectList/Functions.txt) DO mysql -h localhost -D %Database% -u pquser -p%pass% -e "Select concat('Create ', type,' ', name, '
-',body) as '-- Routine' from mysql.proc where name='%%i'" >> ./Functions/%%i.sql
+FOR /F %%i IN (./ObjectList/Routines.txt) DO mysql -h localhost -D %Database% -u %UserName% -p%pass% -e "Select concat('Create ', type,' ', name, ' ',body) as '-- Routine' from mysql.proc where name='%%i'" >> ./Routines/%%i.sql
+
+FOR /F %%i IN (./ObjectList/Functions.txt) DO mysql -h localhost -D %Database% -u %UserName% -p%pass% -e "Select concat('Create ', type,' ', name, ' ',body) as '-- Routine' from mysql.proc where name='%%i'" >> ./Functions/%%i.sql
 
 pause
