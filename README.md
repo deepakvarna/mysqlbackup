@@ -14,3 +14,6 @@ The backup process orks in 2 phases:
 
 # usage warning
 Please be carefull while using using the batch and test backups generated before making them your regular backup utility.
+
+# Suggestions/queries
+Please email me at mrdeepakvarna@gmail.com
